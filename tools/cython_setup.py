@@ -156,6 +156,8 @@ def get_winsdk_lib():
                 # Windows 7 SDKs.
                 r"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib\\x64",
                 r"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.0\\Lib\\x64",
+
+                r""
             ]
         else:
             raise Exception("Unknown architecture")
