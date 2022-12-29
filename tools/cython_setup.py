@@ -157,7 +157,7 @@ def get_winsdk_lib():
                 r"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib\\x64",
                 r"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.0\\Lib\\x64",
 
-                r""
+                r'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\lib\\x64',
             ]
         else:
             raise Exception("Unknown architecture")
