@@ -13,16 +13,17 @@ void DownloadHandler::OnBeforeDownload(
                             CefRefPtr<CefBeforeDownloadCallback> callback)
 {
     REQUIRE_UI_THREAD();
-    bool downloads_enabled = ApplicationSettings_GetBool("downloads_enabled");
-    if (downloads_enabled) {
-        std::string msg = "[Browser process] About to download file: ";
-        msg.append(suggested_name.ToString().c_str());
-        LOG(INFO) << msg.c_str();
-        callback->Continue(suggested_name, true);
-    } else {
-        LOG(INFO) << "[Browser process] Tried to download file,"
-                     " but downloads are disabled";
-    }
+    // bool downloads_enabled = ApplicationSettings_GetBool("downloads_enabled");
+    // if (downloads_enabled) {
+    //     std::string msg = "[Browser process] About to download file: ";
+    //     msg.append(suggested_name.ToString().c_str());
+    //     LOG(INFO) << msg.c_str();
+    //     callback->Continue(suggested_name, true);
+    // } else {
+    //     LOG(INFO) << "[Browser process] Tried to download file,"
+    //                  " but downloads are disabled";
+    // }
+    DownloadHandler_OnBeforeDownload(browser, download_item, suggested_name, callback);
 }
 
 
