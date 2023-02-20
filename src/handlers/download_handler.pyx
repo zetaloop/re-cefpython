@@ -25,3 +25,26 @@ cdef public void DownloadHandler_OnBeforeDownload(
     except:
         (exc_type, exc_value, exc_trace) = sys.exc_info()
         sys.excepthook(exc_type, exc_value, exc_trace)
+
+cdef public void DownloadHandler_OnDownloadUpdated(
+        CefRefPtr[CefBrowser] cefBrowser,
+        CefRefPtr[CefDownloadItem] cefDownloadItem,
+        CefRefPtr[CefDownloadItemCallback] cefCallback
+        ) except * with gil:
+    cdef PyBrowser pyBrowser
+    cdef PyDownloadItem pyDownloadItem
+    cdef PyDownloadItemCallback pyDownloadItemCallback
+    cdef object callback
+    try:
+        pyBrowser = GetPyBrowser(cefBrowser, "OnDownloadUpdated")
+        callback = pyBrowser.GetClientCallback("OnDownloadUpdated")
+        pyDownloadItem = PyDownloadItem()
+        pyDownloadItem.cefDownloadItem = cefDownloadItem
+        pyDownloadItemCallback = PyDownloadItemCallback()
+        pyDownloadItemCallback.cefDownloadItemCallback = cefCallback
+        if callback:
+            callback(browser=pyBrowser, downloadItem=pyDownloadItem, 
+                     callback=pyDownloadItemCallback)
+    except:
+        (exc_type, exc_value, exc_trace) = sys.exc_info()
+        sys.excepthook(exc_type, exc_value, exc_trace)

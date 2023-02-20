@@ -33,11 +33,12 @@ void DownloadHandler::OnDownloadUpdated(
                                 CefRefPtr<CefDownloadItemCallback> callback)
 {
     REQUIRE_UI_THREAD();
-    if (download_item->IsComplete()) {
-        std::string msg = "[Browser process] Download completed, saved to: ";
-        msg.append(download_item->GetFullPath().ToString().c_str());
-        LOG(INFO) << msg.c_str();
-    } else if (download_item->IsCanceled()) {
-        LOG(INFO) << "[Browser process] Download was cancelled";
-    }
+    // if (download_item->IsComplete()) {
+    //     std::string msg = "[Browser process] Download completed, saved to: ";
+    //     msg.append(download_item->GetFullPath().ToString().c_str());
+    //     LOG(INFO) << msg.c_str();
+    // } else if (download_item->IsCanceled()) {
+    //     LOG(INFO) << "[Browser process] Download was cancelled";
+    // }
+    DownloadHandler_OnDownloadUpdated(browser, download_item, callback);
 }

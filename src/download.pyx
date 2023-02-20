@@ -59,3 +59,15 @@ cdef class PyBeforeDownloadCallback:
 
     cpdef Continue(self, str downloadPath, py_bool showDialog):
         self.cefBeforeDownloadCallback.get().Continue(PyToCefStringValue(downloadPath), showDialog)
+
+cdef class PyDownloadItemCallback:
+    cdef CefRefPtr[CefDownloadItemCallback] cefDownloadItemCallback
+
+    cpdef Cancel(self):
+        self.cefDownloadItemCallback.get().Cancel()
+
+    cpdef Pause(self):
+        self.cefDownloadItemCallback.get().Pause()
+
+    cpdef Resume(self):
+        self.cefDownloadItemCallback.get().Resume()
